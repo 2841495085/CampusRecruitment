@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="company-provider" />
+        <module name="gateway-service" />
+        <module name="user-consumer" />
+        <module name="domain" />
+        <module name="user-provider" />
+        <module name="CampusRecruitment" />
+        <module name="eureka-server" />
+        <module name="company-consumer" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="company-consumer" options="-parameters" />
+      <module name="company-provider" options="-parameters" />
+      <module name="domain" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+      <module name="user-consumer" options="-parameters" />
+      <module name="user-provider" options="-parameters" />
+    </option>
+  </component>
+</project>

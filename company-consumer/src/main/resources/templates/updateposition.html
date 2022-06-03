@@ -1,0 +1,117 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="title='校招网',active='home'"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+      <meta charset="utf-8">
+      <meta name="renderer" content="webkit">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>更新职位信息</title>
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/style.css">
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/font-awesome.min.css">
+      <link rel="apple-touch-icon-precomposed" href="http://localhost:8894/company-consumer/templates/images/icon/icon.png">
+      <link rel="shortcut icon" href="http://localhost:8894/company-consumer/templates/images/icon/favicon.ico">
+
+      <style>
+        .col-md-5{
+          margin-left: 200px;
+          width: 800px;
+        }
+      </style>
+</head>
+
+<body class="user-select">
+
+
+<section class="container-fluid">
+  <!-- 头部 -->
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="/">校招网 - 后台管理</a> </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a><em th:text="${session.uName}"></em>&nbsp;&nbsp;&nbsp;欢迎登录！</a></li>
+            <li>
+              <a href="http://localhost:7004/user/toLogin" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+          </ul>
+          <form action="/company/findPositionLikepNameAndbId" method="get" class="navbar-form navbar-right" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="通过关键字搜索" maxlength="15" name="pName">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">搜索</button>
+              </span> </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="row">
+    <!-- 左边菜单栏 -->
+    <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a th:href="@{'/company/findPositionBycId?cId='+${session.cId}}">职位信息</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a th:href="@{'/company/toCompanyInfo?cId='+${session.cId}}">公司信息</a></li>
+        <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a></li>
+      </ul>
+    </aside>
+
+    <!-- 内容盒子  -->
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-header">更新职位信息</h1>
+          <form action="/company/updatePosition" method="get" autocomplete="off">
+
+            <input type="hidden" name="pId" th:value="${position.pId}">
+            <input type="hidden" name="cId" th:value="${position.cId}">
+            <div class="form-group">
+              <label for="category-name">职位名称</label>
+              <input type="text" th:value="${position.pName}" id="category-name" name="pName" class="form-control" placeholder="在此处输入岗位名称" required autocomplete="off">
+              <span class="prompt-text">职位名称</span>
+            </div>
+
+            <div class="form-group">
+              <label for="category-alias">薪资</label>
+              <input type="text" th:value="${position.salary}" id="category-alias" name="salary" class="form-control" placeholder="在此处输入薪资" required autocomplete="off">
+              <span class="prompt-text">请注明年薪或者月薪</span>
+            </div>
+
+            <div class="form-group">
+              <label for="category-alias">招聘人数</label>
+              <input type="text" th:value="${position.num}" id="category-alias" name="num" class="form-control" placeholder="在此处输入招聘人数" required autocomplete="off">
+              <span class="prompt-text">招聘人数</span>
+            </div>
+
+            <div class="form-group">
+              <label for="category-keywords">工作地点</label>
+              <input type="text" th:value="${position.place}" id="category-keywords" name="place" class="form-control" placeholder="在此处输入公司获得的专利数量" autocomplete="off">
+              <span class="prompt-text">工作地点至少具体到市级单位</span>
+            </div>
+
+            <div class="form-group">
+              <label for="category-describe">工作内容</label>
+              <textarea class="form-control" th:utext="${position.pInfo}" id="category-describe" name="pInfo" rows="4" autocomplete="off"></textarea>
+              <span class="prompt-text">字数少于500字</span>
+            </div>
+
+            <div class="form-group">
+              <label for="category-describe">职位要求</label>
+              <textarea class="form-control" th:utext="${position.prequire}" id="category-describe" name="prequire" rows="4" autocomplete="off"></textarea>
+              <span class="prompt-text">字数少于500字</span>
+            </div>
+            <button class="btn btn-primary" type="submit">发布</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

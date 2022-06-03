@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7000/eureka/
+server:
+  port: 7001
+spring:
+  application:
+    name: gateway-service
+zuul:
+  host:
+    connect-timeout-millis: 60000
+  routes:
+    api-a:
+      path: /user/**
+      serviceId: user-consumer
+    api-b:
+      path: /company/**
+      serviceId: comapny-consumer
+      #add-host-header: true
+

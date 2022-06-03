@@ -1,0 +1,115 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="title='校招网',active='home'"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+      <meta charset="utf-8">
+      <meta name="renderer" content="webkit">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>校招网 - 后台管理系统</title>
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/style.css">
+      <link rel="stylesheet" type="text/css" href="http://localhost:8894/company-consumer/templates/css/font-awesome.min.css">
+      <link rel="apple-touch-icon-precomposed" href="http://localhost:8894/company-consumer/templates/images/icon/icon.png">
+      <link rel="shortcut icon" href="http://localhost:8894/company-consumer/templates/images/icon/favicon.ico">
+</head>
+
+<body class="user-select">
+<section class="container-fluid">
+
+  <!-- 头部 -->
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="/">校招网 - 后台管理</a> </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a><em th:text="${session.uName}"></em>&nbsp;&nbsp;&nbsp;欢迎登录！</a></li>
+            <li>
+              <a href="http://localhost:7004/user/quit" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+          </ul>
+          <form action="/company/findPositionLikepNameAndbId" method="get" class="navbar-form navbar-right" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="通过关键字搜索" maxlength="15" name="pName">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">搜索</button>
+              </span> </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="row">
+    <!-- 左边菜单栏 -->
+      <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+          <ul class="nav nav-sidebar">
+              <li class="active"><a th:href="@{'/company/findPositionBycId?cId='+${session.cId}}">职位信息</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+              <li><a th:href="@{'/company/toCompanyInfo?cId='+${session.cId}}">公司信息</a></li>
+              <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a></li>
+          </ul>
+      </aside>
+
+    <!--右边内容盒子-->
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <form action="" method="get">
+        <h1 class="page-header"></h1>
+        <ol class="breadcrumb">
+          <li><a th:href="@{'/company/toPublishPosition?cId='+${session.cId}}">发表招聘信息</a></li>
+        </ol>
+        <h1 class="page-header">管理 <span class="badge"><em th:text="${session.size}"></em></span></h1>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th width="80px"></span> <span class="visible-lg">职位名称</span></th>
+                <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">工作内容</span></th>
+                <th width="80px"> <span class="visible-lg">招收人数</span></th>
+                <th class="hidden-sm" width="60px"><span class="visible-lg">薪资</span></th>
+                <th class="hidden-sm"><span class="glyphicon glyphicon-comment"></span> <span class="visible-lg">岗位要求</span></th>
+                <th width="80px"><span class="visible-lg">工作地点</span></th>
+                <th> <span class="visible-lg">发表时间</span></th>
+                <th width="100px"><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="position:${position}">
+                <td th:text="${position.pName}"></td>
+                <td th:text="${position.pInfo}"></td>
+                <td th:text="${position.num}"></td>
+                <td class="hidden-sm" th:text="${position.salary}"></td>
+                <td class="hidden-sm" th:text="${position.prequire}"></td>
+                <td th:text="${position.place}"></td>
+                <td th:text="${position.time}"></td>
+                <td>
+                  <a th:href="@{'/company/toUpdatePosition?pId='+${position.pId}+'&&cId='+${session.cId}}">修改</a>
+                  <a th:href="@{'/company/deletePosition?pId='+${position.pId}+'&&cId='+${session.cId}}">删除</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <footer class="message_footer">
+          <nav>
+            <ul class="pagination pagenav">
+              <li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
+            </ul>
+          </nav>
+        </footer>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

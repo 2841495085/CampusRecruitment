@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title='校招网',active='home'"
+      xmlns="http://www.w3.org/1999/html">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/frontmodule.css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_style.css?v=0.0.0.9" front="css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_flexslider.css?v=0.0.0.9" front="css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuicore.css?v=0.0.0.9" front="css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuiselectmenu.css?v=0.0.0.9" front="css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuitheme.css?v=0.0.0.9" front="css" />
+
+  <title>招聘详情</title>
+
+  <style>
+     input[type=submit]{
+      width:60px;
+      height: 27px;
+      margin-top: 6px;
+      color: white;
+      line-height: 27px;
+      background-color: gold;
+      border-radius: 0px;
+     }
+
+     .headercontain{
+      width: 1440px;
+      margin: 0 auto;
+     }
+
+     .nav ul {
+      width: 1440px;
+      margin: 0 auto;
+      background: #008FD1;
+      font-size: 0;
+      letter-spacing: -0.31em;
+      clear: both;
+     }
+
+     .denglu {
+      margin-top: 10px;
+     }
+  </style>
+
+ </head>
+ <body>
+
+  <!-- 头部-->
+  <div class="header"> 
+   <div class="headercontain">
+      <!--logo图片-->
+      <div class="logo">
+       <div class="logo">
+        <img src="http://localhost:8894/user-consumer/templates1/images/104003_medias_20141215_20141215logo.jpg?v=635542641034400000" />
+       </div>
+      </div>
+
+      <!--登录模块-->
+      <div class="bs-module">
+     <div class="login-link ">
+
+      <div class="login-hearder">
+       <div th:if="${session.uName} ne null">
+        <a href="">
+         欢迎您：<em th:text="${session.uName}"></em>
+        </a>
+        <a href="/user/quit">退出</a>
+       </div>
+
+       <div th:if="${session.uName} eq null" class="denglu">
+        <img src="http://localhost:8894/user-consumer/templates1/images/logo1.png"/>
+        <a href="/user/toLogin">登录</a>
+       </div>
+      </div>
+
+     </div>
+    </div>
+      <!--module:login end-->
+
+
+   </div>
+
+  </div>
+
+  <!--导航栏  首页-->
+  <div class="nav">
+
+   <div class="bs-module">
+    <div class="menu-simple ">
+     <ul id="portalmenu">
+      <li><a target="_self" th:href="@{'/user/findAllPosition?uName='+${session.uName}}" class="">首页</a> </li>w
+     </ul>
+    </div>
+   </div>
+
+
+  </div>
+
+  <!-- 内容，下部大盒子 -->
+  <div class="contain zpcontain clearfix">
+
+   <!--大盒子的上面俩小盒子-->
+   <div class="clearfix zpdetail eheight">
+
+      <!--右小盒子-职位搜索  -->
+      <div class="bs-module">
+       <div class="positionsearch-smallfresh ">
+        <a name="jlt"></a>
+        <div class="zhiweisousuo bodertop">
+         <div class="parttitleline"></div>
+         <div class="parttitle">
+          <span class="serchico"></span>
+          <div class="wordtitle">
+           职位搜索
+          </div>
+         </div>
+         <div class="serchcontain">
+          <table class="jobserch">
+           <tbody>
+            <tr class="serchjob">
+             <td class="listtitle">工作地点：</td>
+             <td>
+              <ul class="workplace">
+               <span class="selectall"><span class="shuxian"></span><a href="/user/findAllPosition" class="chooseon">全部</a></span>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=北京'+'&&uName='+${session.uName}}">北京</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=上海'+'&&uName='+${session.uName}}">上海</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=深圳'+'&&uName='+${session.uName}}">深圳</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=青岛'+'&&uName='+${session.uName}}">青岛</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=武汉'+'&&uName='+${session.uName}}">武汉</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=郑州'+'&&uName='+${session.uName}}">郑州</a> </li>
+               <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=杭州'+'&&uName='+${session.uName}}">杭州</a> </li>
+              </ul>
+             </td>
+            </tr>
+            <tr class="serchjob">
+             <td class="listtitle"></td>
+             <td>
+                 <form action="/user/findPositionLikepName">
+                     <input type="text" class="serchinput" maxlength="50"  name="pName" placeholder="请输入您要查询的职位名称"/>
+                   <span class="serchbtn">
+                     <input type="submit" id="searchlink" value="搜索"/>
+                   </span>
+                 </form>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+
+      <!--左小盒子-招聘动态-->
+      <div class="zhaopindongtai nomargin bodertop nosame">
+       <!--module:newslist begin-->
+       <div class="bs-module">
+        <div class="newslist-newsimple ">
+         <div class="parttitleline"></div>
+         <div class="parttitle">
+          <span class="dongtaiico"></span>
+          <div class="wordtitle">
+           招聘动态
+          </div>
+         </div>
+         <a th:href="@{'/user/findAllPosition?uName='+${session.uName}}" class="morelinks">更多&gt;&gt;</a>
+         <div class="dongtailinks">
+            <ul th:each="positionList:${positionList}">
+             <li><a th:href="@{'/user/positionDetail?pName='+${positionList.pName}+'&&uName='+${session.uName}}" target="_blank"><em th:text="${positionList.pName}"></em></a></li>
+            </ul>
+         </div>
+        </div>
+       </div>
+
+      </div>
+
+   </div>
+
+   <!--大盒子的下面的内容部分-->
+   <div class="zhiweixiangqing fr"> 
+    <!--module:positiondetail begin--> 
+    <div class="bs-module"> 
+     <div class="positiondetail-simple "> 
+
+      <div class="xiangqingtitle"> 
+       <span><em th:text="${position.pName}"></em></span>
+      </div> 
+      <div class="xiangqingcontain"> 
+       <div class="xiangqingline"></div> 
+       <ul class="xiangqinglist clearfix"> 
+        <li class="ntitle td-HasRecruitCategories">工作地点：</li>
+        <li class="nvalue"><font color="#6495ed"><em th:text="${position.place}"></font></em></li>
+        <li class="ntitle td-HasKind">工作性质：</li> 
+        <li class="nvalue"> <font color="#6495ed">全职 </font></li>
+        <li class="ntitle td-HasSalaries">薪资范围：</li>
+        <li class="nvalue"><font color="#6495ed"><em th:text="${position.salary}"></em></font></li>
+        <li class="ntitle td-HasHeadCount">招聘人数：</li> 
+        <li class="nvalue"><font color="#6495ed"><em th:text="${position.num}"></em></font></li>
+       </ul> 
+       <ul class="xiangqinglist clearfix"> 
+        <li class="ntitle td-HasPostDate">发布时间：</li> 
+        <li class="nvalue"><font color="#6495ed"><em th:text="${position.time}"></em></font></li>
+
+        <br/>
+        <div class="xiangqingtext"> 
+         <p>公司名称:</p>
+         <p><a th:href="@{'/user/companyDetail?cName='+${company.cName}}"><font color="#6495ed"><em th:text="${company.cName}"></em></font></a></p>
+         <br/>
+
+         <p>联系我们:</p>
+         <p>&nbsp;&nbsp;&nbsp;E-mail：<font color="#6495ed"><em th:text="${company.cMail}"></em></font></p>
+         <p>电话号码：<font color="#6495ed"><em th:text="${company.cPhone}"></em></font></p>
+         <br/>
+
+         <p>工作职责:</p> 
+         <p><font color="#6495ed"><em th:text="${position.pInfo}"></em></font></p>
+         <br />
+
+         <p>任职资格：</p> 
+         <p><font color="#6495ed"><em th:text="${position.prequire}"></em></font></p>
+        </div> 
+        <div class="xiangqingfooter clearfix"> 
+         <div class="footerbtn fl">
+          <a href="https://mail.163.com/" id="apply">现在申请</a>
+         </div> 
+         <a th:href="@{'/user/findAllPosition?uName='+${session.uName}}">返回职位列表</a>
+        </div>
+
+
+       </ul>
+      </div>
+     </div> 
+    </div> 
+    <!--module:positiondetail end--> 
+   </div> 
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+   <span>&copy;2022&nbsp;&nbsp;校招网&nbsp;&nbsp;京ICP备XXX号 京公网安备XXX号 &nbsp;Powered by&nbsp;&nbsp;&nbsp;<a style="color: darkslategray">SiHao Li</a></span>
+  </div>
+ </body>
+</html>

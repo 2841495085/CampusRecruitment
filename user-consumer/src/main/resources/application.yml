@@ -1,0 +1,35 @@
+server:
+  port: 7004  #服务端口
+spring:
+  application:
+    name: cr-user-consumer   #服务名
+
+  devtools:    # 热部署
+    restart:
+      #需要实时更新的目录
+      additional-paths: resources/**,static/**,templates/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    hostname: localhost
+
+feign:
+   hystrix:
+     enabled: true
+
+hystrix:
+  command:
+    execution:
+      isolation:
+        thread:
+          timeoutInMilliseconds: 6000  # 设置hystrix的超时时间为6000ms
+
+thymeleaf:
+  cache: false      #关闭缓存
+  prefix: classpath:templates/
+  suffix: .html
+  encoding: UTF-8
+  content-type: application/json;charset=UTF-8 # 页面的文本显示类型规范 json返回数据类型支持中文

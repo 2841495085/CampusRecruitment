@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title='校招网',active='home'"
+      xmlns="http://www.w3.org/1999/html">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/frontmodule.css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_select.css?v=0.0.0.9" front="css" />
+  <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_style.css?v=0.0.0.9" front="css" />
+
+
+  <title>公司介绍</title>
+
+     <style>
+         .headercontain{
+             width: 1440px;
+             margin: 0 auto;
+         }
+
+         .nav ul {
+             width: 1440px;
+             margin: 0 auto;
+             background: #008FD1;
+             font-size: 0;
+             letter-spacing: -0.31em;
+             clear: both;
+         }
+
+         .denglu {
+             margin-top: 10px;
+         }
+     </style>
+
+ </head> 
+ <body>
+
+   <!-- 头部 logo-->
+   <div class="header">
+   <div class="headercontain"> 
+    <div class="logo"> 
+     <img src="http://localhost:8894/user-consumer/templates1/images/104003_medias_20141215_20141215logo.jpg?v=635542641034400000" />
+    </div> 
+    <!--module:login begin-->
+       <div class="bs-module">
+           <div class="login-link ">
+
+               <div class="login-hearder">
+                   <div th:if="${session.uName} ne null">
+                       <a href="">
+                           欢迎您：<em th:text="${session.uName}"></em>
+                       </a>
+                       <a href="/user/quit">退出</a>
+                   </div>
+
+                   <div th:if="${session.uName} eq null" class="denglu">
+                       <img src="http://localhost:8894/user-consumer/templates1/images/logo1.png"/>
+                       <a href="/user/toLogin">登录</a>
+                   </div>
+               </div>
+
+           </div>
+       </div>
+   </div> 
+  </div>
+
+   <!-- 菜单栏-->
+   <div class="nav">
+   <!--module:menu begin--> 
+   <div class="bs-module"> 
+    <div class="menu-simple "> 
+     <ul id="portalmenu"> 
+      <li><a target="_self" th:href="@{'/user/findAllPosition?uName='+${session.uName}}" class="">首页</a> </li>
+     </ul> 
+    </div> 
+   </div> 
+   <!--module:menu end--> 
+  </div>
+
+
+   <!-- 内容盒 -->
+   <div class="contain joblist clearfix">
+       <!--左边俩盒子 -->
+       <div class="containsidebar">
+            <!-- 左上小盒子-公司介绍 -->
+           <div class="zhaopindongtai bodertop nofly minheight">
+               <div class="bs-module">
+                <div class="menu-secondtemplate ">
+                 <div class="parttitleline"></div>
+                 <div class="titlelinks">
+                  <ul>
+                   <ul class="secondarymenu">
+                    <li class="secondCurrent"><a target="_self" href="">公司介绍</a></li>
+                   </ul>
+                  </ul>
+                 </div>
+                </div>
+               </div>
+           </div>
+
+            <!-- 左下小盒子-招聘动态 -->
+           <div class="zhaopindongtai bodertop">
+                <div class="bs-module">
+                 <div class="newslist-newsimple ">
+                    <div class="parttitleline"></div>
+                    <div class="parttitle">
+                     <span class="dongtaiico"></span>
+                     <div class="wordtitle">招聘动态</div>
+                    </div>
+                    <a th:href="@{'/user/findAllPosition?uName='+${session.uName}}" class="morelinks">更多&gt;&gt;</a>
+                    <div class="dongtailinks">
+                        <ul th:each="positionList:${positionList}">
+                            <li><a th:href="@{'/user/positionDetail?pName='+${positionList.pName}+'&&uName='+${session.uName}}" target="_blank"><em th:text="${positionList.pName}"></em></a></li>
+                        </ul>
+                    </div>
+                 </div>
+                </div>
+        </div>
+       </div>
+
+        <!--右边大盒子-联系我们 -->
+       <div class="zhiweisousuo bodertop selectmod zx_aboutus">
+        <div class="parttitleline"></div>
+        <div class="parttitle">
+         <span class="dongtaiico"></span>
+         <div class="wordtitle">
+          联系我们
+         </div>
+        </div>
+
+        <div class="s_detail">
+         <div class="about adminarea" id="ctlArticleShow">
+             <p class="m_b10 unreset"><span style="font-size: medium;">公司名称：<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <font color="gray" style="font-size: 15px"><em th:text="${company.cName}"></em></font></span>
+             </p>
+                 <br/>
+              <p class="title f_18 f_c m_b10 unreset"><span style="font-size: medium;">公司介绍：</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.cInfo}"></font></em></span>
+              </p>
+                 </br>
+              <p class="m_b30 unreset"><span style="font-size: medium;"><img src="http://localhost:8894/user-consumer/templates1/images/map.jpg"/></span></p>
+                 <br/><br/>
+              <p class="m_b10 unreset"><span style="font-size: medium;">&nbsp;&nbsp;&nbsp;董事长：
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.chairman}"></em></font></span>
+              </p>
+                 <br/>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">所属行业：
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.industry}"></em></font></span>
+              </p>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">员工数量：
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.cNum}"></em></font></span>
+              </p>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">注册资本：
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.capital}"></em></font></span>
+              </p>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">专利数量：
+                  <font color="gray" style="font-size: 13.5px"><em th:text="${company.patents}"></em></font></span>
+              </p>
+                 <br/>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">公司电话：
+                  <font color="gray" style="font-size: 15px"><em th:text="${company.cPhone}"></em></font></span>
+              </p>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">公司邮箱：
+                  <a href="https://mail.163.com/"><font color="gray" style="font-size: 15px"><em th:text="${company.cMail}"></em></font></span></a>
+              </p>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">官方微博：
+                  <a href="https://weibo.com/newlogin?tabtype=weibo&gid=102803&openLoginLayer=0&url=https%3A%2F%2Fweibo.com%2F"><font color="gray" style="font-size: 15px"><em th:text="${company.cBlog}"></em></font></span></a>
+              </p>
+                 <br/>
+
+              <p class="m_b10 unreset"><span style="font-size: medium;">公司地址：
+                  <a href="https://ditu.amap.com/"><font color="gray" style="font-size: 15px"><em th:text="${company.cAddress}"></em></font></span></a>
+              </p>
+                <br/>
+
+         </div>
+        </div>
+       </div>
+   </div>
+
+   <!-- 底部 -->
+   <div class="footer">
+       <span>&copy;2022&nbsp;&nbsp;校招网&nbsp;&nbsp;京ICP备XXX号 京公网安备XXX号 &nbsp;Powered by&nbsp;&nbsp;&nbsp;<a style="color: darkslategray">SiHao Li</a></span>
+   </div>
+ </body>
+</html>

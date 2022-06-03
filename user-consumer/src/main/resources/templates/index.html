@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title='校招网',active='home'"
+      xmlns="http://www.w3.org/1999/html">
+     <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/frontmodule.css" />
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_style.css?v=0.0.0.9" front="css" />
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_flexslider.css?v=0.0.0.9" front="css" />
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuicore.css?v=0.0.0.9" front="css" />
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuiselectmenu.css?v=0.0.0.9" front="css" />
+          <link type="text/css" rel="stylesheet" href="http://localhost:8894/user-consumer/templates1/css/5_themes_default_jqueryuitheme.css?v=0.0.0.9" front="css" />
+
+         <script type="text/javascript" src="http://localhost:8894/user-consumer/templates1/js/5_themes_default_jquery191.js?v=0.0.0.9"></script>
+         <script type="text/javascript" src="http://localhost:8894/user-consumer/templates1/js/5_themes_default_jqueryflexslidermin.js?v=0.0.0.9"></script>
+          <title>首页</title>
+
+
+        <style>
+            input[type=submit]{
+                width:60px;
+                height: 27px;
+                margin-top: 6px;
+                color: white;
+                line-height: 27px;
+                background-color: gold;
+                border-radius: 0px;
+            }
+
+            .headercontain{
+                width: 1440px;
+                margin: 0 auto;
+            }
+
+            .nav ul {
+                width: 1440px;
+                margin: 0 auto;
+                background: #008FD1;
+                font-size: 0;
+                letter-spacing: -0.31em;
+                clear: both;
+            }
+
+            .denglu {
+                margin-top: 10px;
+            }
+        </style>
+     </head>
+
+
+
+ <body>
+
+     <!--头部-logo-->
+   <div class="header">
+   <div class="headercontain">
+    <div class="logo">
+     <img src="http://localhost:8894/user-consumer/templates1/images/104003_medias_20141215_20141215logo.jpg?v=635542641034400000" />
+    </div>
+
+    <div class="bs-module">
+     <div class="login-link ">
+
+         <div class="login-hearder">
+             <div th:if="${session.uName} ne null">
+                 <a href="">
+                     欢迎您：<em th:text="${session.uName}"></em>
+                 </a>
+                 <a href="/user/quit">退出</a>
+             </div>
+
+             <div th:if="${session.uName} eq null" class="denglu">
+                 <img src="http://localhost:8894/user-consumer/templates1/images/logo1.png"/>
+                 <a href="/user/toLogin">登录</a>
+             </div>
+         </div>
+
+     </div>
+    </div>
+    <!--module:login end-->
+   </div>
+  </div>
+
+     <!--导航栏-首页-->
+   <div class="nav">
+    <!--module:menu begin-->
+    <div class="bs-module">
+
+      <div class="menu-simple ">
+        <ul id="portalmenu">
+           <li><a target="_self" th:href="@{'/user/findAllPosition?uName='+${session.uName}}" class="current">首页</a> </li>
+        </ul>
+      </div>
+
+
+    </div>
+    <!--module:menu end-->
+   </div>
+
+     <!--页面图片部分-->
+   <div class="pictureturn">
+    <div class="bs-module">
+     <div class="imageslider-default ">
+      <div class="flexslider">
+       <ul class="slides">
+        <li> <img src="http://localhost:8894/user-consumer/templates1/images/104003_medias_2015923_201592317513947.jpg" /> </li>
+       </ul>
+      </div>
+
+      <script type="text/javascript">
+     $(document).ready(function(){
+         $('.flexslider').flexslider({ animation: "fade", directionNav: false, slideshowSpeed: 5000 });
+     });
+ </script>
+
+     </div>
+    </div>
+   </div>
+	 
+	 <!--内容-->
+   <div class="contain joblist clearfix">
+
+
+        <!--左边俩盒子-->
+       <div class="containsidebar">
+        <!--左上位置-职位类型-->
+        <div class="bs-module">
+         <div class="positioncategory-smallfresh ">
+          <div class="zhiweifenlei bodertop">
+           <div class="parttitleline"></div>
+           <div class="parttitle height0">
+            <span class="fenleiico"></span>
+            <div class="wordtitle lh0" title="职位类型">
+             热门公司
+            </div>
+           </div>
+           <div class="dongtailinks">
+               <ul th:each="companyList:${companyList}">
+                   <li><a th:href="@{'/user/companyDetail?cName='+${companyList.cName}}" target="_blank"><em th:text="${companyList.cName}"></em></a></li>
+               </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+        <!--左下位置-招聘动态-->
+        <div class="zhaopindongtai bodertop">
+         <div class="bs-module">
+          <div class="newslist-newsimple ">
+           <div class="parttitleline"></div>
+           <div class="parttitle">
+            <span class="dongtaiico"></span>
+            <div class="wordtitle">
+             最新招聘动态
+            </div>
+           </div>
+           <a href="" class="morelinks">更多&gt;&gt;</a>
+           <div class="dongtailinks">
+                <ul th:each="positionList:${positionList}">
+                    <li><a th:href="@{'/user/positionDetail?pName='+${positionList.pName}+'&&uName='+${session.uName}}" target="_blank"><em th:text="${positionList.pName}"></em></a></li>
+                </ul>
+           </div>
+          </div>
+         </div>
+         <!--module:newslist end-->
+        </div>
+       </div>
+
+        <!--右大盒子-->
+       <div class="clearfix sousuocontain fl">
+             <!--右上搜索位置-->
+             <div class="bs-module">
+              <div class="positionsearch-smallfresh ">
+               <a name="jlt"></a>
+               <!--职位搜索-->
+               <div class="zhiweisousuo bodertop">
+                <div class="parttitleline"></div>
+                <div class="parttitle">
+                 <span class="serchico"></span>
+                 <div class="wordtitle">
+                  职位搜索
+                 </div>
+                </div>
+                <div class="serchcontain">
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                 <table class="jobserch">
+                  <tbody>
+                   <tr class="serchjob">
+                    <td class="listtitle">工作地点：</td>
+                    <td>
+                      <ul class="workplace">
+                        <span class="selectall"><span class="shuxian"></span><a href="/user/findAllPosition" class="chooseon">全部</a></span>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=北京'}">北京</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=上海'}">上海</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=深圳'}">深圳</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=青岛'}">青岛</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=武汉'}">武汉</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=郑州'}">郑州</a> </li>
+                        <li> <span class="shuxian"></span> <a th:href="@{'/user/findPositionByPlace?place=杭州'}">杭州</a> </li>
+                      </ul>
+                    </td>
+                   </tr>
+
+                   <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                   <tr class="serchjob">
+                    <td class="listtitle"></td>
+
+                    <td>
+                        <form action="/user/findPositionLikepName">
+                            <input type="text" class="serchinput" maxlength="50" name="pName" placeholder="请输入您要查询的职位名称" />
+                        <span class="serchbtn">
+                            <input type="submit" id="searchlink" value="搜索"/>
+                        </span>
+                        </form>
+
+                    </td>
+
+                   </tr>
+                   <input type="hidden" name="p" value="" id="jobAdClassHidden" />
+                  </tbody>
+                 </table>
+                </div>
+               </div>
+              </div>
+             </div>
+             <!--右下展示位置-->
+             <div class="bs-module">
+              <div class="positionlist-newtemplate ">
+               <div class="clearfix tablecontain">
+                <table class="listtable">
+                 <thead>
+                  <tr class="tabletitle">
+                   <th class="tableleft">&nbsp;&nbsp;职位名称</th>
+                   <th class="tableleft">&nbsp;薪资</th>
+                   <th class="tableleft">&nbsp;工作地点</th>
+                   <th class="tableleft">&nbsp;&nbsp;公司名称</th>
+                  </tr>
+                 </thead>
+                 <tbody>
+                  <tr th:each="position:${position}" >
+                   <td class="tableleft joblsttitle"><a th:href="@{'/user/positionDetail?pName='+${position.pName}+'&&uName='+${session.uName}}"><em th:text="${position.pName}"></em></a> </td>
+                   <td class="tableleft joblsttitle"><font color="#125468"><em th:text="${position.salary}"></em></font></td>
+                   <td class="tableleft joblsttitle" th:text="${position.place}"></td>
+                   <td class="tableleft joblsttitle" th:text="${position.cName}"></td>
+                  </tr>
+                 </tbody>
+                </table>
+
+
+                <span class="tablenote">共&nbsp;<font color="#125468"><em th:text="${session.i}"></em></font>&nbsp;条职位信息</span>
+                <div class="tablefooter">
+                 <span>当前第1/19页</span>
+                 <script language="javascript" type="text/javascript">function _MvcPager_Keydown(e){var _kc,_pib;if(window.event){_kc=e.keyCode;_pib=e.srcElement;}else if(e.which){_kc=e.which;_pib=e.target;}var validKey=(_kc==8||_kc==46||_kc==37||_kc==39||(_kc>=48&&_kc<=57)||(_kc>=96&&_kc<=105));if(!validKey){if(_kc==13){ _MvcPager_GoToPage(_pib,19);}if(e.preventDefault){e.preventDefault();}else{event.returnValue=false;}}}function _MvcPager_GoToPage(_pib,_mp){var pageIndex;if(_pib.tagName=="SELECT"){pageIndex=_pib.options[_pib.selectedIndex].value;}else{pageIndex=_pib.value;var r=new RegExp("^\\s*(\\d+)\\s*$");if(!r.test(pageIndex)){alert("当前页码错误");return;}else if(RegExp.$1<1||RegExp.$1>_mp){alert("当前页码超出范围");return;}}var _hl=document.getElementById(_pib.id+'link').childNodes[0];var _lh=_hl.href;_hl.href=_lh.replace('=0','='+pageIndex);var evt=document.createEvent('MouseEvents');evt.initEvent('click',true,true);_hl.dispatchEvent(evt);_hl.href=_lh;}</script>
+                 <div class="pager clearfix">
+                  <span><a disabled="disabled" class="disabled next">首页</a></span>
+                  <span><a disabled="disabled" class="disabled next">上一页</a></span>
+                  <span><a href="" class="next">下一页</a></span>
+                  <span><a href="">尾页</a></span>
+                  <span class="gobtn"><input type="text" id="_MvcPager_Ctrl0_pib" value="1" onkeydown="_MvcPager_Keydown(event)" /><input type="button" value="跳转" /><span id="_MvcPager_Ctrl0_piblink" style="display:none;width:0px;height:0px"><a href="" onclick="window.open(this.attributes.getNamedItem('href').value,'_self')"></a></span></span>
+                 </div>
+                </div>
+               </div>
+               <script type="text/javascript">
+
+
+             //获取locationUrl判定是否需要获取额外添加的列
+             var url = window.location.href;
+
+             if (url.indexOf("cnnp.zhiye.com") > 0) {//域名
+                 //获取列表第一列职位广告ID
+                 var ids = [];
+                 var jobTitles = $(".joblsttitle a ");
+                 //循环获取HREF提取JobId
+                 for (var i = 0; i < jobTitles.length; i++) {
+                     //            var id = jobTitles[i].pathname.split("/")[2];
+                     //            //点击标签后该Url携带其他条件，再次过滤
+                     //            if (id.indexOf("?")) {
+                     //                id = id.split("?")[0];
+                     //            }
+                     var id = $(jobTitles[i]).attr("jobadid");
+                     ids.push(parseInt(id));
+                 }
+
+                 //判定列表中存在数据
+                 if (ids.length > 0) {
+                     $.ajax({
+                         url: "/Extensions/Widget/GetJobAdditional",
+                         data: {
+                             jobAdIds: ids.toString(),
+                             additionalKeys: "extA9000_102054_949224493" //extA900_100102_2063773255
+                         },
+                         type: "POST",
+                         dataType: 'json'
+                     }).done(function (resp) {
+                         //添加学历列
+                         $(".listtable thead .tabletitle th:eq(2)").before('<th class="tableleft">学历</th>');
+                         var htmlMap = [];
+                         for (var i = 0; i < ids.length; i++) {
+                             var map = { jobadid: ids[i], eduName: '' };
+                             for (var j = 0; j < resp.length; j++) {
+
+                                 if (ids[i] == parseInt(resp[j].JobAdId)) {
+                                     map.eduName = jobAdEduMap[resp[j].AdditionaList[0].AdditionaValue];
+                                 }
+                             }
+                             htmlMap.push(map);
+                         }
+                         for (var o = 0; o < htmlMap.length; o++) {
+                             $(".joblsttitle a[jobadid='" + (htmlMap[o].jobadid || '') + "'] ").parent().parent().find("td:eq(2)").before('<td class="tableleft joblsttitle" title="' + htmlMap[o].eduName + '">' + htmlMap[o].eduName + '</td>');
+                         }
+                     });
+                 }
+             }
+         </script>
+              </div>
+             </div>
+       </div>
+   </div>
+
+     <!--底部-->
+     <div class="footer">
+         <span>&copy;2022&nbsp;&nbsp;校招网&nbsp;&nbsp;京ICP备999号 京公网安备666号 &nbsp;Powered by&nbsp;&nbsp;&nbsp;<a style="color: darkslategray">SiHao Li</a></span>
+     </div>
+ </body>
+</html>
